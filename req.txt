@@ -1,0 +1,144 @@
+User :
+    - id
+    - name
+    - location
+    - mobile
+    - image
+    - password
+    - rate
+    - numReport
+    - created_at
+    
+BuyPost :      // needPost
+    - id
+    - needy // User
+    - content (15 letters)
+    - created_at
+    - isHidden
+    - list of SellPost
+
+SellPost : 
+    - id
+    - type (direct or auction)
+    - seller // User
+    - nameItem (15 letters)
+    - price
+    - TypeOfItem
+    - stauts in persint %
+    - list of image
+    - state of this post ( is not salled yet , in progress , is salled) // addition
+    - created_at
+    - isHidden
+    - list of BuyOrder
+
+
+Types :
+    - id 
+    - name_type
+
+BuyOrder : 
+    - id 
+    - buyer // User
+    - SellPost
+    - price // is valid if SellPost.type == auction 
+    - created_at
+
+Employee :
+    - id
+    - name
+    - password
+    - mobile
+    - rate
+    - image
+    - region
+    - isFree
+    - list of DeleviryOpreation
+    
+DeleviryOpreation :
+    - id 
+    - type ( 1 -  take item from seller , 2 -  give item to buyer == take money from buyer , 3 - give money to seller )
+    - SellOpreation
+    - employee 
+    - rate 
+    - reason
+    - created_at 
+    - isDone
+
+SellOpreation :
+    - id 
+    - SalePost
+    - BuyPost
+    - BuyOrder
+    - ratio
+    - created_at
+    - isDone
+    - list of DeleviryOpreation
+
+Company :
+    - list of users
+    - list of employee 
+    - list of SaleOpreation
+    - money
+
+
+________________________________________________________________________________________
+
+User : 
+    - singUp 
+    - singIn
+    - logOut
+    - update
+    - delete
+    - report
+    - search
+    - giveRateToDeleviryOpreation // maybe
+    - giveReasonToDeleviryOpreation // maybe  ( if rate is less )
+
+BuyPost :
+    - create
+    - update
+    - delete
+    - fetchByDate
+
+SellPost :
+    - create
+    - update ( befor any BuyOrder come  just price  )
+    - updatePrice ( if SellPost.type == auction )
+    - delete
+    - fetchByDateAndRate
+
+Item : 
+    - create
+    - update
+
+BuyOrder :
+    - add ( SellPost , BuyPost )
+    - remove
+
+Employee : 
+    - add
+    - update
+    - updateRate
+    - updateFree
+    - fetchFreeByRegion // order by rate
+    - fetchAllRegion   
+    - fetchAllDeleviryOpreation
+    - makeDeleviryOpreationDone
+    - makeDeleviryOpreationIgnored
+
+DeleviryOpreation :
+    - add ( user , employee  , item or money , type )
+    
+SellOpreation :
+    - add
+    - fetchSumOfRatio
+    - makeSellOpreationDone  // from comapany
+
+Company :
+    - deleteUser
+    - deleteEmployee
+    - updateUserRate
+    - updateEmployeeRate
+    - addRatio
+
+    
